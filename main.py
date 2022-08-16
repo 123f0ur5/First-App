@@ -11,16 +11,16 @@ def start_timee():
     start_time()
 
 def start_time():
-    global second; global minute; global hour; global running
+    global second; global minute; global hour; global running; global secondd
     if running:
         print()
-        label_Time.config(text='{}:{}:{}'.format(hour, minute, second))
+        label_Time.config(text=f'{hour:01d}:{minute:02d}:{second:02d}')
         if second < 59:
             second += 1
         elif second == 59:
             second = 0
             minute += 1
-        if minute == 59:
+        if minute == 60:
             minute = 0
             hour += 1
         label_Time.after(1000, start_time)
