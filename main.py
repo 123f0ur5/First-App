@@ -1,4 +1,4 @@
-from tkinter import Button, Entry, Label, Tk, Toplevel
+from tkinter import ACTIVE, DISABLED, Button, Label, Tk
 
 window = Tk()
 
@@ -8,13 +8,13 @@ hour = 0; minute = 0; second = 0
 def start_timee():
     global running
     running = True
+    btn_Start.config(state=DISABLED)
     start_time()
 
 def start_time():
     global second; global minute; global hour; global running; global secondd
     if running:
-        print()
-        label_Time.config(text=f'{hour:01d}:{minute:02d}:{second:02d}')
+        label_Time.config(text=f'{hour:02d}:{minute:02d}:{second:02d}')
         if second < 59:
             second += 1
         elif second == 59:
@@ -29,11 +29,13 @@ def reset_time():
     global hour; global minute; global second
     label_Time.config(text='00:00:00')
     hour = 0; minute = 0; second = 0
+    btn_Start.config(state=ACTIVE)
     pause_time()
 
 def pause_time():
     global running
     running = False
+    btn_Start.config(state=ACTIVE)
 
 
 window.title("Stopwatch")
@@ -48,6 +50,6 @@ btn_Pause = Button(window, text='Pause', font=('',12), width='7', height='2', co
 btn_Pause.place(x = 90, y = 130)
 btn_Reset = Button(window, text='Reset', font=('',12), width='7', height='2', command=reset_time)
 btn_Reset.place(x = 170, y = 130)
-btn_Quit = Button(window, text='Quit', font=('',12), width='7', height='2', command=quit)
+btn_Quit = Button(window, text='Exit', font=('',12), width='7', height='2', command=quit)
 btn_Quit.place(x = 250, y = 130)
 window.mainloop()
